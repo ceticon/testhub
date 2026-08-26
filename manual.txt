@@ -80,3 +80,119 @@ L‰gg till den i gitHub
 PÂ n‰sta raspberry Pi
 pip install -r requirements.txt
 
+====================================================
+TOKEN
+Spara GitHub-token lokalt f√∂r HTTPS
+1. Aktivera lagring av credentials
+	git config --global credential.helper store
+Kontrollera: git config --global credential.helper
+	borde svara : store
+2. Skapa eller uppdatera filen .git-credentials
+	nano ~/.git-credentials
+	>>https://ceticon:GITHUB_TOKEN@github.com<<
+	spara
+3. Skydda filen
+	chmod 600 ~/.git-credentials
+4. Kontrollera att filen finns
+	ls -l ~/.git-credentials
+	borde svara
+	-rw------- .... /home/nsext/.git-credential
+
+
+Alternativ 2
+
+1. git config --global credential.helper store
+
+Sedan vid fˆ∂rsta: git push
+
+anger jag
+Username: ceticon
+Password: <min token>
+
+Git sparar d√• tokenen automatiskt i:
+~/.git-credentials
+
+Om du vill se att en credential finns sparad:
+cat ~/.git-credentials
+
+===============================================
+SSH
+1. Kontrollera om SSH-nyckel redan finns
+ls -la ~/.ssh
+
+Om du ser: 
+id_rsa
+id_rsa.pub
+
+eller
+
+id_ed25519
+id_ed25519.pub
+
+sÂ har du redan en SSH-nyckel.
+
+2. Skapa ny SSH-nyckel (om ingen finns)
+	ssh-keygen -t ed25519 -C "min_epost@example.com"
+	
+	Tryck Enter p√• fr√•gorna.
+	
+	Det skapar:
+	~/.ssh/id_ed25519
+	~/.ssh/id_ed25519.pub
+	
+3. Visa den publika nyckeln	
+	cat ~/.ssh/id_ed25519.pub
+	eller
+	cat ~/.ssh/id_rsa.pub
+	
+4. L√§gg till nyckeln p√• GitHub	
+`I GitHub Settings
+	SSH and GPG keys
+    	New SSH key
+	
+5. Testa anslutningen
+	ssh -T git@github.com
+	
+	Om allt fungerar f√•r du n√•got liknande:
+	Hi ceticon! You've successfully authenticated,
+	but GitHub does not provide shell access.
+	
+6. Anv√§nd SSH-repo	
+	I st√§llet fˆr:
+	https://github.com/ceticon/projekt.git
+	anv‰§nder du:
+	git@github.com:ceticon/projekt.git
+
+	Exempel:
+	git remote add origin git@github.com:ceticon/testhub.git
+	
+7. Pusha	
+	git push
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
