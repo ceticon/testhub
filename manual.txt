@@ -1,0 +1,82 @@
+GENERAL
+==============================================================
+token : https://github.com/settings/tokens/5280741259
+repositorie : https://github.com/ceticon/testhttps.git
+Project folder : /home/nsext/Documents/Code/Python/Projects/testhttps
+
+
+spara token : 
+nano ~/.git-credentials
+https://ceticon:DIN_TOKEN@github.com
+chmod 600 ~/.git-credentials
+
+Du kan kontrollera att Git anvÃ¤nder credential helper:
+git config --global credential.helper
+bör svara : store
+
+nano .gitignore :
+=============================
+myenv/
+myvenv/
+venv/
+
+__pycache__/
+*.pyc
+.env
+.vscode/
+===========================
+
+
+5.initiera Git : git init
+6. LÃ¤gg till filerna : git add .
+6.kontrollera : git status
+7.Skapa fÃ¶rsta commit : git commit -m "FÃ¶rsta versionen"
+8. Koppla mot GitHub : git remote add origin https://github.com/ceticon/testhttps.git
+kontrollera : gitremote -v : bör svara
+origin	https://github.com/ceticon/testhttps.git (fetch)
+origin	https://github.com/ceticon/testhttps.git (push)
+
+9. Byt till main : git branch -M main
+10. Ladda upp : git push -u origin main
+
+
+============================
+1. git init
+2. git add .
+3. git commit -m "Första versionen"
+
+4. git remote add origin https://github.com/ceticon/testhttps.git
+5. git branch -M main
+6. git push -u origin main  : git push -u origin main --force
+
+=================================================
+Nytt projekt
+1. cd MittProjekt
+2. 
+3. git init
+4. git add .
+5. git commit -m "Första versionen"
+6.
+7. git remote add origin https://github.com/ceticon/MittProjekt.git
+8. 
+9. git branch -M main
+10. git push -u origin main
+=====================================================
+
+Ny version av ett befintligt projekt
+1. git add .
+2. git commit -m "Fixade bugg i temperaturhantering"
+3. git push
+====================================================
+PIP
+pip freeze > requirements.txt
+
+Lägg till den i gitHub
+1. git add requirements.txt
+2. git commit -m "Lade till requirements"
+3. git push
+
+
+På nästa raspberry Pi
+pip install -r requirements.txt
+
