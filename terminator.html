@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Temperaturövervakning</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .pi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .pi-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .pi-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .temperature {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .timestamp {
+            font-size: 13px;
+            color: #777;
+            margin-top: 15px;
+        }
+
+        .status {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .online {
+            color: green;
+        }
+
+        .offline {
+            color: red;
+        }
+
+        .last-update {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>🌡️ Temperaturövervakning</h1>
+
+    <div class="pi-grid">
+
+        <div class="pi-card">
+            <div class="pi-name">Raspberry Pi 1</div>
+
+            <div id="pi1-temperature" class="temperature">
+                --
+            </div>
+
+            <div id="pi1-timestamp" class="timestamp">
+                --
+            </div>
+
+            <div id="pi1-status" class="status">
+                --
+            </div>
+        </div>
+
+
+        <div class="pi-card">
+            <div class="pi-name">Raspberry Pi 2</div>
+
+            <div id="pi2-temperature" class="temperature">
+                --
+            </div>
+
+            <div id="pi2-timestamp" class="timestamp">
+                --
+            </div>
+
+            <div id="pi2-status" class="status">
+                --
+            </div>
+        </div>
+
+
+        <div class="pi-card">
+            <div class="pi-name">Raspberry Pi 3</div>
+
+            <div id="pi3-temperature" class="temperature">
+                --
+            </div>
+
+            <div id="pi3-timestamp" class="timestamp">
+                --
+            </div>
+
+            <div id="pi3-status" class="status">
+                --
+            </div>
+        </div>
+
+
+        <div class="pi-card">
+            <div class="pi-name">Raspberry Pi 4</div>
+
+            <div id="pi4-temperature" class="temperature">
+                --
+            </div>
+
+            <div id="pi4-timestamp" class="timestamp">
+                --
+            </div>
+
+            <div id="pi4-status" class="status">
+                --
+            </div>
+        </div>
+
+
+        <div class="pi-card">
+            <div class="pi-name">Raspberry Pi 5</div>
+
+            <div id="pi5-temperature" class="temperature">
+                --
+            </div>
+
+            <div id="pi5-timestamp" class="timestamp">
+                --
+            </div>
+
+            <div id="pi5-status" class="status">
+                --
+            </div>
+        </div>
+
+    </div>
+
+    <div id="last-update" class="last-update">
+        --
+    </div>
+
+</div>
+
+
+<script>
+
+    const clients = [
+        "pi1",
+        "pi2",
+        "pi3",
+        "pi4",
+        "pi5"
+    ];
+
+
+    async function updateTemperatures() {
+
+        try {
+
+            /*
+             * ?t= gör att webbläsaren inte använder
+             * en gammal cachead version av JSON-filen.
+             */
+
+            const response = await fetch(
+                "data.json?t=" + Date.now()
+            );
+
+            if (!response.ok) {
+                throw new Error("Kunde inte läsa data.json");
+            }
+
+            const data = await response.json();
+
+
+            clients.forEach(function(client) {
+
+                const temperatureElement =
+                    document.getElementById(
+                        client + "-temperature"
+                    );
+
+                const timestampElement =
+                    document.getElementById(
+                        client + "-timestamp"
+                    );
+
+                const statusElement =
+                    document.getElementById(
+                        client + "-status"
+                    );
+
+
+                if (data[client] &&
+                    data[client].temperature !== null) {
+
+                    /*
+                     * Temperatur
+                     */
+
+                    temperatureElement.textContent =
+                        data[client].temperature.toFixed(1) + " °C";
+
+
+                    /*
+                     * Tidsstämpel
+                     */
+
+                    const date = new Date(
+                        data[client].timestamp
+                    );
+
+                    timestampElement.textContent =
+                        "Senast: " +
+                        date.toLocaleString("sv-SE");
+
+
+                    /*
+                     * Status
+                     */
+
+                    statusElement.textContent = "● Online";
+
+                    statusElement.className =
+                        "status online";
+
+                }
+                else {
+
+                    temperatureElement.textContent =
+                        "-- °C";
+
+                    timestampElement.textContent =
+                        "Ingen data";
+
+                    statusElement.textContent =
+                        "● Offline";
+
+                    statusElement.className =
+                        "status offline";
+                }
+
+            });
+
+
+            /*
+             * Visa när webbsidan senast hämtade JSON-filen
+             */
+
+            document.getElementById("last-update")
+                .textContent =
+                "Webbsidan uppdaterad: " +
+                new Date().toLocaleTimeString("sv-SE");
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            document.getElementById("last-update")
+                .textContent =
+                "Kunde inte läsa data.json";
+
+        }
+
+    }
+
+
+    /*
+     * Läs data direkt när sidan öppnas
+     */
+
+    updateTemperatures();
+
+
+    /*
+     * Uppdatera varannan sekund
+     */
+
+    setInterval(
+        updateTemperatures,
+        2000
+    );
+
+</script>
+
+</body>
+
+</html>

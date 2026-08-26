@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Temperatur</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        #temperature {
+            font-size: 80px;
+        }
+        #fiktiv_vikt {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Aktuell temperatur</h1>
+
+    <div id="temperature">-- °C </div>
+
+    <div id="timestamp"></div>
+
+    <div id="fiktiv_vikt">ball
+        -- °C
+    </div>
+        
+
+    <script>
+        async function updateTemperature() {
+            const response = await fetch("temperatur.json?t=" + Date.now());
+            const data = await response.json();
+
+            document.getElementById("temperature").innerHTML =
+                data.temperature + " °C";
+
+            document.getElementById("timestamp").innerHTML =
+                "Senast uppdaterad: " + data.timestamp;
+
+            document.getElementById("fiktiv_vikt").innerHTML =
+                "Fiktiv vikt: " + data.fiktiv_vikt + " g";
+        }
+
+        updateTemperature();
+
+        setInterval(updateTemperature, 1000);
+    </script>
+
+</body>
+</html>
