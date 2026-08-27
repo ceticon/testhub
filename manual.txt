@@ -183,6 +183,8 @@ Lösning *
 git config --global user.email "din.mejl@example.com"
 git config --global user.name "Ditt Namn"
 
+en ny rad
+
 	
 	
 	
