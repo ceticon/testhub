@@ -28,14 +28,13 @@ __pycache__/
 
 
 5.initiera Git : git init
-6. LÃ¤gg till filerna : git add .
+6.Lägg till filerna : git add .
 6.kontrollera : git status
-7.Skapa fÃ¶rsta commit : git commit -m "FÃ¶rsta versionen"
-8. Koppla mot GitHub : git remote add origin https://github.com/ceticon/testhttps.git
-kontrollera : gitremote -v : bör svara
-origin	https://github.com/ceticon/testhttps.git (fetch)
-origin	https://github.com/ceticon/testhttps.git (push)
-
+7.Skapa första commit : git commit -m "Första versionen"
+8.Koppla mot GitHub : git remote add origin https://github.com/ceticon/testhttps.git
+	kontrollera : gitremote -v : bör svara
+		origin	https://github.com/ceticon/testhttps.git (fetch)
+		origin	https://github.com/ceticon/testhttps.git (push)
 9. Byt till main : git branch -M main
 10. Ladda upp : git push -u origin main
 
@@ -44,7 +43,6 @@ origin	https://github.com/ceticon/testhttps.git (push)
 1. git init
 2. git add .
 3. git commit -m "Första versionen"
-
 4. git remote add origin https://github.com/ceticon/testhttps.git
 5. git branch -M main
 6. git push -u origin main  : git push -u origin main --force
@@ -82,7 +80,7 @@ pip install -r requirements.txt
 
 ====================================================
 TOKEN
-Spara GitHub-token lokalt fÃ¶r HTTPS
+Spara GitHub-token lokalt för HTTPS
 1. Aktivera lagring av credentials
 	git config --global credential.helper store
 Kontrollera: git config --global credential.helper
@@ -134,7 +132,7 @@ så har du redan en SSH-nyckel.
 2. Skapa ny SSH-nyckel (om ingen finns)
 	ssh-keygen -t ed25519 -C "min_epost@example.com"
 	
-	Tryck Enter pÃ¥ frÃ¥gorna.
+	Tryck Enter på frågorna.
 	
 	Det skapar:
 	~/.ssh/id_ed25519
@@ -145,7 +143,7 @@ så har du redan en SSH-nyckel.
 	eller
 	cat ~/.ssh/id_rsa.pub
 	
-4. LÃ¤gg till nyckeln pÃ¥ GitHub	
+4. Lägg till nyckeln på GitHub	
 `I GitHub Settings
 	SSH and GPG keys
     	New SSH key
@@ -153,12 +151,12 @@ så har du redan en SSH-nyckel.
 5. Testa anslutningen
 	ssh -T git@github.com
 	
-	Om allt fungerar fÃ¥r du nÃ¥got liknande:
+	Om allt fungerar får du något liknande:
 	Hi ceticon! You've successfully authenticated,
 	but GitHub does not provide shell access.
 	
-6. AnvÃ¤nd SSH-repo	
-	I stÃ¤llet för:
+6. Använd SSH-repo	
+	I stället för:
 	https://github.com/ceticon/projekt.git
 	anvä¤nder du:
 	git@github.com:ceticon/projekt.git
