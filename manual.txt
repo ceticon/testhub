@@ -166,9 +166,23 @@ så har du redan en SSH-nyckel.
 	
 7. Pusha	
 	git push
-	
-	
-	
+
+========================================
+Kopiera (klona) repot:
+
+Gå till ditt projekt på GitHub.
+Klicka på den gröna knappen Code och kopiera länken (HTTPS eller SSH).
+
+Öppna terminalen eller kommandotolken på din nya dator.
+Skriv git clone [klistra in länken] för att ladda ner projektet till den nya datorn.
+
+========================================
+Det där är ett klassiskt Git-problem! Git vet inte vem du är än, vilket krävs för att kunna registrera vem som gör ändringarna (commits) i projektet.
+Author identity unknown*** Please tell me who you are.Run git config --global user.email "you@example.com" git 
+Lösning *
+git config --global user.email "din.mejl@example.com"
+git config --global user.name "Ditt Namn"
+
 	
 	
 	
